@@ -6,15 +6,26 @@ const groq = new Groq({apiKey:process.env.GROQ_API_KEY})
 async function main(){
    const completion =  await groq.chat.completions.create({
         model:"openai/gpt-oss-20b",
+        response_format:{type:"json_object"},
         messages:[
             {
+                role:"system",
+                content:`Your name is Jarvis, you are smart AI assistant. You have to give answer in that format so that it could be readable on terminal.
+                           You have to response in valid JSON object
+                           Example:
+                            {
+                                Messege:"string"
+                            } 
+                `
+            },
+            {
                 role:"user",
-                content:"Hi, this is my first app for learning GenAi, is current model is free to use? I'm using it for learning, GIVE ME RESPONSE IN 2 LINES JUST"
+                content:"HI, who are you?"
             }
         ]
     })
    // console.log(completion)
-    console.log(completion.choices[0].message)
+    console.log(completion.choices[0].message.content)
 }
 
 main()
