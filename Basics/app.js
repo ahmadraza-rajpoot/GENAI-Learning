@@ -22,7 +22,8 @@ async function main(){
                 role:"user",
                 content:"HI, who are you?"
             }
-        ]
+        ],
+        
     })
    // console.log(completion)
     console.log(completion.choices[0].message.content)
